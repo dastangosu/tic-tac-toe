@@ -122,12 +122,12 @@ const GameController = (() => {
     if (GameBoard.putMarker(row, col, currentTurnPlayer) !== 'taken') {
       GameBoard.displayCellMarker(cell);
       if (GameBoard.isGameWon(currentTurnPlayer.getMarker())) {
-        console.log(currentTurnPlayer.getName() + " wins");
+        announcement.textContent = currentTurnPlayer.getName() + " wins!";
         stopGame();
         return;
       }
       else if(GameBoard.isDraw()) {
-        console.log("Draw");
+        announcement.textContent = "Draw!";
         stopGame();
         return;
       }
@@ -141,10 +141,9 @@ const GameController = (() => {
     const col = +e.target.dataset.col;
     makeMove(e.target,row,col);
   }
-  function stopGame() {
+  function stopGame(isGameWon) {
     cells.forEach((cell) => {
       cell.removeEventListener('click',handleCellClick);
-      announcement.textContent = currentTurnPlayer.getName() + " wins!";
     })
   }
 
